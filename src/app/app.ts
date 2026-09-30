@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet , NgIf , FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('rose-art');
+export class AppComponent {
+shopName = 'Rose Art';
+message = '';
+userName = '';
+categories = ['Portraits', 'Nature', 'Abstract'];
+
+  showMessage() {
+    this.message = 'Welcome to Rose Art!';
+  }
 }

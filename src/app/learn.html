@@ -1,0 +1,121 @@
+<h1>{{shopName}}</h1> <!--INTERPOLATION--><!--data binding-->
+<p>{{ message }}</p>
+
+<button (click)="showMessage()">Visit Rose Art</button><!--event binding-->
+<button [disabled]="message === ''"> a Painting</button><!--property binding-->
+<p *ngIf="message !== ''">
+  You are visiting Rose Art! <!--Structural directive-->
+</p>
+<hr>
+
+<label for="name">Your name:</label>
+
+<input
+  id="name"
+  type="text"
+  [(ngModel)]="userName" 
+><!--two way data binding-->
+
+<p>Hello, {{ userName }}</p>
+
+<h2>Painting Categories</h2>
+
+<ul>
+  <li *ngFor="let category of categories">
+    {{ category }}
+  </li>
+</ul>
+
+<h2>My Paintings</h2>
+
+<ul>
+  <li *ngFor="let painting of paintings; let i = index"><hr>
+    {{ i + 1 }}.
+    <strong>{{ painting.title }}</strong>
+    <img [src]="painting.image" alt="{{ painting.title }}" width="200" height="200"><br>
+    - ₹{{ painting.price }} <br> 
+    -{{painting.category}}<br>
+    <p>{{painting.description}}</p>
+    <span *ngIf="painting.available">
+      — Available</span>
+    <span *ngIf="!painting.available">-not Available</span>
+    <span *ngIf="painting.price > 3000">
+      — Premium Painting
+    </span>
+    <button (click)="selectPainting(painting)">view painting</button>
+  </li>
+</ul>
+
+<h2>Selected painting</h2>
+<p *ngIf="selectedPainting != null">
+  you selected:
+  {{selectedPainting.title}} - ₹{{selectedPainting.price}}
+</p>
+<span *ngIf="selectedPainting.available">selected painting is available</span>
+
+<!----->
+
+<h1>{{shopName}}</h1> <!--INTERPOLATION--><!--data binding-->
+<p>{{ message }}</p>
+
+<button (click)="showMessage()">Visit Rose Art</button><!--event binding-->
+<button [disabled]="message === ''">Buy a Painting</button><!--property binding-->
+<p *ngIf="message !== ''">
+  You are visiting Rose Art! <!--Structural directive-->
+</p>
+<hr>
+
+<label for="name">Your name:</label>
+
+<input
+  id="name"
+  type="text"
+  [(ngModel)]="userName" 
+><!--two way data binding-->
+
+<p>Hello, {{ userName }}</p>
+
+<h2>Painting Categories</h2>
+
+<ul>
+  <li *ngFor="let category of categories">
+    {{ category }}
+  </li>
+</ul>
+<h2>My Paintings</h2>
+
+<div class="paintings-container">
+
+  <app-painting-card
+    *ngFor="let painting of paintings"
+    [painting]="painting"
+    (paintingSelected)="selectPainting($event)">
+  </app-painting-card>
+  <hr>
+
+  <h2>Selected Painting</h2>
+  
+  <div *ngIf="selectedPainting !== null">
+  
+    <h3>{{ selectedPainting.title | uppercase }}</h3>
+  
+    <img
+      [src]="selectedPainting.image"
+      [alt]="selectedPainting.title"
+    >
+  <p>
+    Status: {{ selectedPainting.available | paintingStatus }}
+  </p>
+  <p>
+    Price: {{ selectedPainting.price | currency:'INR' }}
+  </p>
+  
+    <p>Category: {{ selectedPainting.category }}</p>
+  
+    <p>{{ selectedPainting.description }}</p>
+  
+  </div>
+  <p>{{ shopStatus }}</p>
+
+<p>Today's date: {{ today | date:'dd MMMM yyyy' }}</p>
+</div>

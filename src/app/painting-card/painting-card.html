@@ -1,0 +1,27 @@
+<div class="painting-card">
+  <button (click)="viewPainting()">
+    View Painting
+  </button>
+
+    <img
+      [src]="painting.image"
+      [alt]="painting.title"
+    >
+  
+    <h3>{{ painting.title }}</h3>
+  
+    <p>Price: ₹{{ painting.price }}</p>
+  
+    <p>Category: {{ painting.category }}</p>
+  
+    <p>{{ painting.description }}</p>
+  
+    <p *ngIf="painting.available">
+      Available
+    </p>
+  
+    <p *ngIf="!painting.available">
+      Sold Out
+    </p>
+  
+  </div>

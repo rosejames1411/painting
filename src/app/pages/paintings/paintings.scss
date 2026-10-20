@@ -1,0 +1,22 @@
+.paintings-page {
+    padding: 30px 20px;
+    text-align: center;
+  
+    h1 {
+      color: #b11226;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+  
+    .intro {
+      color: #666;
+      margin-bottom: 30px;
+    }
+  
+    .paintings-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+  }

@@ -1,27 +1,23 @@
-<h1>{{shopName}}</h1> <!--INTERPOLATION--><!--data binding-->
-<p>{{ message }}</p>
+<nav class="navbar">
 
-<button (click)="showMessage()">Visit Rose Art</button><!--event binding-->
-<button [disabled]="message === ''">Buy a Painting</button><!--property binding-->
-<p *ngIf="message !== ''">
-  You are visiting Rose Art! <!--Structural directive-->
-</p>
-<hr>
-
-<label for="name">Your name:</label>
-
-<input
-  id="name"
-  type="text"
-  [(ngModel)]="userName" 
-><!--two way data binding-->
-
-<p>Hello, {{ userName }}</p>
-
-<h2>Painting Categories</h2>
-
-<ul>
-  <li *ngFor="let category of categories">
-    {{ category }}
-  </li>
-</ul>
+    <a routerLink="/" class="logo">
+      Rose Art
+    </a>
+  
+    <div class="nav-links">
+  
+      <a routerLink="/" routerLinkActive="active">
+        Home
+      </a>
+  
+      <a routerLink="/paintings" routerLinkActive="active">
+        Paintings
+      </a>
+  
+    </div>
+  
+  </nav>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>

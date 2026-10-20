@@ -1,0 +1,26 @@
+.painting-card {
+    width: 240px;
+    padding: 16px;
+    margin: 16px;
+    border: 1px solid #ead4d8;
+    border-radius: 12px;
+    text-align: center;
+    background-color: #fffafa;
+  
+    img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  
+    h3 {
+      color: #b11226;
+      margin-top: 12px;
+    }
+  
+    p {
+      color: #555;
+      font-size: 14px;
+    }
+  }

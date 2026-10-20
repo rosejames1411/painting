@@ -1,0 +1,18 @@
+<section class="paintings-page">
+
+    <h1>Our Paintings</h1>
+  
+    <p class="intro">
+      Discover artwork created with love.
+    </p>
+  
+    <div class="paintings-container">
+  
+      <app-painting-card
+        *ngFor="let painting of paintings"
+        [painting]="painting">
+      </app-painting-card>
+  
+    </div>
+  
+  </section>

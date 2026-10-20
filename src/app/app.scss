@@ -1,4 +1,35 @@
-h1 {
-  color: #b11226;
-  text-align: center;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background-color: #fff5f6;
+  border-bottom: 1px solid #ead4d8;
+
+  .logo {
+    color: #b11226;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: #444;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a.active {
+      color: #b11226;
+      font-weight: bold;
+    }
+  }
+}
+
+main {
+  padding-bottom: 30px;
 }

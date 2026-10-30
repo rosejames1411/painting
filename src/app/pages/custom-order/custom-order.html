@@ -1,1 +1,229 @@
-<p>custom-order works!</p>
+<section class="custom-order-page">
+  <div class="confirmation-panel" *ngIf="orderSubmitted">
+    <h2>Thank You!</h2>
+
+    <p>Your custom painting request has been prepared.</p>
+
+    <p>
+      We will review your requirements and confirm the price
+      and delivery timeline.
+    </p>
+  </div>
+
+  <p class="success-message" *ngIf="successMessage">
+    {{ successMessage }}
+  </p>
+
+  <h1>Order Your Custom Painting</h1>
+
+  <p class="intro">
+    Turn your favourite memories into beautiful hand-painted artwork.
+  </p>
+
+  <form [formGroup]="customOrderForm" (ngSubmit)="submitOrder()">
+
+    <div class="form-field">
+      <label for="customerName">Your Name</label>
+      <input
+        type="text"
+        id="customerName"
+        formControlName="customerName"
+        placeholder="Enter your name"
+      >
+      <p
+        class="error-message"
+        *ngIf="
+          customOrderForm.get('customerName')?.touched &&
+          customOrderForm.get('customerName')?.hasError('required')
+        "
+      >
+        Please enter your name.
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="customerEmail">Email Address</label>
+      <input
+        type="email"
+        id="customerEmail"
+        formControlName="customerEmail"
+        placeholder="Enter your email"
+      >
+      <p
+        class="error-message"
+        *ngIf="
+          customOrderForm.get('customerEmail')?.touched &&
+          customOrderForm.get('customerEmail')?.hasError('required')
+        "
+      >
+        Please enter your email address.
+      </p>
+
+      <p
+        class="error-message"
+        *ngIf="
+          customOrderForm.get('customerEmail')?.touched &&
+          customOrderForm.get('customerEmail')?.hasError('email')
+        "
+      >
+        Please enter a valid email address.
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="paintingType">Painting Type</label>
+      <select id="paintingType" formControlName="paintingType">
+        <option value="">Select painting type</option>
+        <option value="portrait">Portrait</option>
+        <option value="landscape">Landscape</option>
+        <option value="custom">Other Custom Painting</option>
+      </select>
+      <p
+        class="error-message"
+        *ngIf="
+          customOrderForm.get('paintingType')?.touched &&
+          customOrderForm.get('paintingType')?.hasError('required')
+        "
+      >
+        Please select a painting type.
+      </p>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="numberOfPeople">Number of People</label>
+        <select id="numberOfPeople" formControlName="numberOfPeople">
+          <option [ngValue]="1">1 Person</option>
+          <option [ngValue]="2">2 People</option>
+          <option [ngValue]="3">3 People</option>
+          <option [ngValue]="4">4 People</option>
+          <option [ngValue]="5">5 People</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="paintingSize">Painting Size</label>
+        <select id="paintingSize" formControlName="paintingSize">
+          <option value="small">Small — 8 × 10 inches</option>
+          <option value="medium">Medium — 12 × 16 inches</option>
+          <option value="large">Large — 16 × 20 inches</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      class="price-preview"
+      *ngIf="customOrderForm.get('paintingType')?.value === 'portrait'"
+    >
+      <h3>Estimated Portrait Price</h3>
+
+      <p>₹{{ portraitPrice }}</p>
+
+      <small>₹{{ pricePerPerson }} per person</small>
+
+      <p class="size-note">
+        Selected size:
+        {{ customOrderForm.get('paintingSize')?.value | titlecase }}
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="referenceImage">Upload Reference Image</label>
+      <input
+        type="file"
+        id="referenceImage"
+        accept="image/*"
+        (change)="onImageSelected($event)"
+      >
+      <small>
+        Select a photograph that will help us understand your requirements.
+      </small>
+      <p class="selected-file" *ngIf="selectedImage">
+        Selected image: {{ selectedImage.name }}
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="preferredDate">Preferred Delivery Date</label>
+      <input
+        type="date"
+        id="preferredDate"
+        formControlName="preferredDate"
+        [min]="minimumDeliveryDate"
+      >
+      <small>
+        This is your preferred date, not a confirmed delivery promise.
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="specialInstructions">
+        Special Instructions (Optional)
+      </label>
+      <textarea
+        id="specialInstructions"
+        formControlName="specialInstructions"
+        placeholder="Mention colours, canvas size, style, or other preferences"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="form-field">
+      <label for="description">Describe Your Painting</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Describe the painting you want"
+        rows="4"
+      ></textarea>
+      <p
+        class="error-message"
+        *ngIf="
+          customOrderForm.get('description')?.touched &&
+          customOrderForm.get('description')?.hasError('minlength')
+        "
+      >
+        Please enter at least 10 characters.
+      </p>
+    </div>
+
+    <div
+      class="order-summary"
+      *ngIf="
+        customOrderForm.get('paintingType')?.value &&
+        customOrderForm.get('paintingType')?.value === 'portrait'
+      "
+    >
+      <h3>Your Order Summary</h3>
+
+      <p>
+        <span class="label">Customer</span>
+        {{ orderSummary.customerName || 'Not entered yet' }}
+      </p>
+
+      <p>
+        <span class="label">Painting</span>
+        {{ orderSummary.paintingType | titlecase }}
+      </p>
+
+      <p>
+        <span class="label">Number of people</span>
+        {{ orderSummary.numberOfPeople }}
+      </p>
+
+      <p>
+        <span class="label">Size</span>
+        {{ orderSummary.paintingSize | titlecase }}
+      </p>
+
+      <p class="estimate">
+        <span class="label">Estimated price</span>
+        ₹{{ orderSummary.estimatedPrice }}
+      </p>
+    </div>
+
+    <button type="submit">Submit Request</button>
+
+  </form>
+
+</section>

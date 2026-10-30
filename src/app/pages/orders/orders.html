@@ -1,0 +1,23 @@
+<div class="orders-container">
+
+    <h1>My Orders</h1>
+  
+    <div *ngIf="orders.length === 0">
+  
+      <p>You haven't placed any orders yet.</p>
+  
+    </div>
+  
+    <div class="order-card" *ngFor="let order of orders">
+  
+      <h3>{{ order.paintingName }}</h3>
+  
+      <p>Order ID: {{ order.orderId }}</p>
+  
+      <p>Amount: ₹{{ order.amount }}</p>
+  
+      <p>Status: {{ order.status }}</p>
+  
+    </div>
+  
+  </div>

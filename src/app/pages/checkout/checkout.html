@@ -1,0 +1,81 @@
+<div class="checkout-container">
+    <div *ngIf="orderPlaced; else checkoutContent">
+
+        <h1>Thank You!</h1>
+      
+        <p>Your order details have been prepared successfully.</p>
+      
+        <p>We will update you once order processing is available.</p>
+      
+        <a routerLink="/paintings">Continue Shopping</a>
+      
+      </div>
+      <ng-template #checkoutContent>
+    <h1>Checkout</h1>
+  
+    <form [formGroup]="checkoutForm">
+  
+      <h2>Delivery Information</h2>
+  
+      <label>Full Name</label>
+      <input type="text" formControlName="customerName">
+      <div *ngIf="nameControl?.touched && nameControl?.invalid">
+        <small *ngIf="nameControl?.errors?.['required']">
+          Name is required.
+        </small>
+      </div>
+  
+      <label>Email</label>
+      <input type="email" formControlName="email">
+      <div *ngIf="emailControl?.touched && emailControl?.invalid">
+        <small *ngIf="emailControl?.errors?.['required']">
+          Email is required.
+        </small>
+      
+        <small *ngIf="emailControl?.errors?.['email']">
+          Enter a valid email address.
+        </small>
+      </div>
+  
+      <label>Phone Number</label>
+      <input type="tel" formControlName="phone">
+      <div *ngIf="phoneControl?.touched && phoneControl?.invalid">
+        <small>
+          Enter a valid 10-digit Indian mobile number.
+        </small>
+      </div>
+  
+      <label>Address</label>
+      <textarea formControlName="address"></textarea>
+  
+      <label>City</label>
+      <input type="text" formControlName="city">
+  
+      <label>State</label>
+      <input type="text" formControlName="state">
+  
+      <label>Pincode</label>
+      <input type="text" formControlName="pincode">
+  
+      <button type="button" (click)="placeOrder()">
+        Continue
+      </button>
+  
+    </form>
+    <h2>Order Summary</h2>
+    <div class="order-item" *ngFor="let item of cartItems">
+
+        <img [src]="item.image" [alt]="item.title">
+      
+        <div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.category }}</p>
+          <p>₹{{ item.price }}</p>
+        </div>
+      
+      </div>
+      <div class="order-total">
+        <h3>Total Amount: ₹{{ total }}</h3>
+      </div>
+    </ng-template>
+  </div>

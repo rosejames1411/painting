@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Painting } from '../../model/painting.model';
 import { PaintingService } from '../../services/painting';
 import { PaintingCardComponent } from '../../painting-card/painting-card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paintings',
@@ -17,10 +18,19 @@ export class PaintingsComponent implements OnInit {
 
   paintings: Painting[] = [];
 
-  constructor(private paintingService: PaintingService) {}
-
+  constructor(
+    private paintingService: PaintingService,
+    private router: Router
+  ) {}
+  openPainting(painting: Painting): void {
+    this.router.navigate([
+      '/painting-details',
+      painting.title
+    ]);
+  }
   ngOnInit(): void {
     this.paintings = this.paintingService.getPaintings();
+    
   }
 
 }

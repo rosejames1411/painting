@@ -48,6 +48,7 @@ ngOnInit(): void {
   }
 
   today = new Date();
+  currentYear = this.today.getFullYear();
 
   //paintings is a array containing Painting objects
   paintings: Painting[] = [];

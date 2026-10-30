@@ -10,7 +10,8 @@
   
       <app-painting-card
         *ngFor="let painting of paintings"
-        [painting]="painting">
+        [painting]="painting" 
+        (paintingSelected)="openPainting($event)">
       </app-painting-card>
   
     </div>

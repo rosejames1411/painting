@@ -13,7 +13,21 @@
       <a routerLink="/paintings" routerLinkActive="active">
         Paintings
       </a>
+
+      <a routerLink="/custom-order" routerLinkActive="active">
+        Custom Order
+      </a>
   
+      <a routerLink="/cart" routerLinkActive="active">
+        Cart
+      </a>
+      <a routerLink="/login">Login</a>
+
+<a routerLink="/register">Register</a>
+
+<a routerLink="/profile">My Profile</a>
+
+<a routerLink="/orders">My Orders</a>
     </div>
   
   </nav>
@@ -21,3 +35,9 @@
   <main>
     <router-outlet></router-outlet>
   </main>
+
+  <footer class="site-footer">
+    <p class="brand">Rose Art</p>
+    <p>Timeless paintings, crafted with devotion.</p>
+    <p class="copyright">&copy; {{ currentYear }} Rose Art. All rights reserved.</p>
+  </footer>

@@ -1,0 +1,25 @@
+<div class="account-container">
+
+    <h1>Welcome Back!</h1>
+    <p>Login to your Rose Art account.</p>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+  
+      <label>Email Address</label>
+      <input type="email" formControlName="email">
+  
+      <label>Password</label>
+      <input type="password" formControlName="password">
+  
+      <button type="submit">Login</button>
+  
+    </form>
+  
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  
+    <p>
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+  
+  </div>

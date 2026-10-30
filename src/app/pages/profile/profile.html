@@ -1,0 +1,107 @@
+<div class="profile-container">
+
+  <h1>My Profile</h1>
+
+  <p class="success-message" *ngIf="successMessage">
+    {{ successMessage }}
+  </p>
+
+  <div class="profile-card" *ngIf="!isEditing">
+
+    <h2>{{ customer.name }}</h2>
+
+    <p>Email: {{ customer.email }}</p>
+
+    <p>Phone: {{ customer.phone }}</p>
+
+    <div class="profile-actions">
+      <button type="button" (click)="startEditing()">
+        Edit Profile
+      </button>
+
+      <a routerLink="/orders">View My Orders</a>
+
+      <button type="button" class="logout-button" (click)="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+  <form
+    class="profile-card edit-form"
+    *ngIf="isEditing"
+    [formGroup]="profileForm"
+    (ngSubmit)="saveProfile()"
+  >
+
+    <div class="form-field">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" formControlName="name">
+      <p
+        class="error-message"
+        *ngIf="
+          profileForm.get('name')?.touched &&
+          profileForm.get('name')?.hasError('required')
+        "
+      >
+        Please enter your name.
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" formControlName="email">
+      <p
+        class="error-message"
+        *ngIf="
+          profileForm.get('email')?.touched &&
+          profileForm.get('email')?.hasError('required')
+        "
+      >
+        Please enter your email address.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          profileForm.get('email')?.touched &&
+          profileForm.get('email')?.hasError('email')
+        "
+      >
+        Please enter a valid email address.
+      </p>
+    </div>
+
+    <div class="form-field">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" formControlName="phone">
+      <p
+        class="error-message"
+        *ngIf="
+          profileForm.get('phone')?.touched &&
+          profileForm.get('phone')?.hasError('required')
+        "
+      >
+        Please enter your phone number.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          profileForm.get('phone')?.touched &&
+          profileForm.get('phone')?.hasError('pattern')
+        "
+      >
+        Enter a valid 10-digit Indian mobile number.
+      </p>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Save Changes</button>
+      <button type="button" class="cancel-button" (click)="cancelEditing()">
+        Cancel
+      </button>
+    </div>
+
+  </form>
+
+</div>

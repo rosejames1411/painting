@@ -1,0 +1,56 @@
+<section class="painting-details-page">
+
+    <div *ngIf="painting; else paintingNotFound">
+  
+      <img
+        class="painting-image"
+        [src]="painting.image"
+        [alt]="painting.title"
+      >
+  
+      <div class="painting-information">
+  
+        <h1>{{ painting.title }}</h1>
+  
+        <p class="price">
+          ₹{{ painting.price }}
+        </p>
+  
+        <p class="category">
+          Category: {{ painting.category }}
+        </p>
+  
+        <p class="description">
+          {{ painting.description }}
+        </p>
+  
+        <p *ngIf="painting.available" class="available">
+          Available
+        </p>
+  
+        <p *ngIf="!painting.available" class="sold-out">
+          Sold Out
+        </p>
+  
+        <button
+        type="button"
+        [disabled]="!painting.available"
+        (click)="addToCart()"
+      >
+        Add to Cart
+      </button>
+  
+        <a routerLink="/paintings" class="back-link">
+          Back to Paintings
+        </a>
+  
+      </div>
+  
+    </div>
+  
+    <ng-template #paintingNotFound>
+      <h2>Painting not found</h2>
+      <a routerLink="/paintings">Return to the gallery</a>
+    </ng-template>
+  
+  </section>

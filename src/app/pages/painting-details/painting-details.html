@@ -3,11 +3,16 @@
     <div *ngIf="painting; else paintingNotFound">
   
       <img
+        *ngIf="painting.image"
         class="painting-image"
         [src]="painting.image"
         [alt]="painting.title"
       >
-  
+
+      <div class="image-placeholder" *ngIf="!painting.image">
+        {{ painting.title }}
+      </div>
+
       <div class="painting-information">
   
         <h1>{{ painting.title }}</h1>

@@ -4,10 +4,15 @@
   </button>
 
     <img
+      *ngIf="painting.image"
       [src]="painting.image"
       [alt]="painting.title"
     >
-  
+
+    <div class="image-placeholder" *ngIf="!painting.image">
+      {{ painting.title }}
+    </div>
+
     <h3>{{ painting.title }}</h3>
   
     <p>Price: ₹{{ painting.price }}</p>

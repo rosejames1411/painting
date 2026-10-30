@@ -13,12 +13,27 @@
     gap: 40px;
   }
 
-  .painting-image {
+  .painting-image,
+  .image-placeholder {
     width: 45%;
     max-height: 500px;
     object-fit: cover;
     border-radius: 2px;
     border: 1px solid var(--color-border-gold);
+  }
+
+  .image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: var(--color-black);
+    color: var(--color-gold);
+    font-family: var(--font-display);
+    font-size: 22px;
+    text-align: center;
   }
 
   .painting-information {
